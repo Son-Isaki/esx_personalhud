@@ -23,9 +23,7 @@ ESX = nil
 
 Citizen.CreateThread(function()
     while ESX == nil do
-        TriggerEvent('esx:getSharedObject', function(obj)
-            ESX = obj
-        end)
+        TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
         Citizen.Wait(0)
     end
 
@@ -82,11 +80,13 @@ isinvehicle = function()
         
             if Config.LegacyFuel then 
                 local fuellevel = exports["LegacyFuel"]:GetFuel(veh)
-                SendNUIMessage({speed = speed, speedtext = speedtext, maxspeed = maxspeed, action = "update_fuel", fuel = fuellevel, showFuel = true})
+            elseif Config.ESXFuelStations then
+                local fuellevel = exports["esx_fuelstations"]:GetFuel(veh)
             else
                 local fuellevel = GetVehicleFuelLevel(veh)
-                SendNUIMessage({speed = speed, speedtext = speedtext, maxspeed = maxspeed, action = "update_fuel", fuel = fuellevel, showFuel = true})
             end
+
+            SendNUIMessage({speed = speed, speedtext = speedtext, maxspeed = maxspeed, action = "update_fuel", fuel = fuellevel, showFuel = true})
 
             if Driving == false then
                 checkvehclass = true
@@ -494,11 +494,11 @@ RegisterKeyMapping('seatbelt', 'Activate Seatbelt', 'keyboard', 'B')
 --[[End of Commands & KeyMappings]]
 
 --[[Single Checks]]--
-if Config.Speed == "mph" or Config.Speed == "MPH" then
+if Config.UseKilometers then
+        speedtext = "KM/H"
+        speedomulti = 3.6
+    else
         speedtext = "MPH"
         speedomulti = 2.236936
-    else
-        speedtext = "KMH"
-        speedomulti = 3.6
 end
 --[[End of Single Checks]]--
