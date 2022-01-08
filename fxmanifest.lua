@@ -1,11 +1,10 @@
 fx_version 'cerulean'
-
 game 'gta5'
 
 name 'joehud'
-author 'Isaki'
+author 'joerogan#0001 / CosmoKramer / Isaki'
 description 'HUD, Seatbelt & Speedlimiter System'
-version '1.0.0'
+version '1.13.1'
 
 ui_page 'html/ui.html'
 
