@@ -692,7 +692,7 @@ window.addEventListener("message", function (event) {
     if (finalfuel < 0.2) {
       FuelBar.path.setAttribute("stroke", "red");
     } else if (finalfuel > 0.2) {
-      FuelBar.path.setAttribute("stroke", "white");
+      FuelBar.path.setAttribute("stroke", "blue");
     }
   }
 
